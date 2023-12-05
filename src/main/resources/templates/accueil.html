@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Page d'accueil</title>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+    <body>
+        <header>
+            <th:block th:replace="/components/navbar">
+            </th:block>
+        </header>
+        <div class="accueil_style">
+            <div class="h1">
+                <p>Nos produits les plus appréciés </p>
+            </div>
+            <div class="conteneur_img_accueil">
+                <div class="img_accueil">
+                    <a href="page_produit.jsp"> <img src="/style/img/CHAT.jpg" alt=""> </a>
+                </div>
+                <div class="img_accueil">
+                    <img src="/style/img/CHAT.jpg" alt="">
+                </div>
+                <div class="img_accueil">
+                    <img src="/style/img/CHAT.jpg" alt="">
+                </div>
+                <div class="img_accueil">
+                    <img src="/style/img/CHAT.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer-basic">
+            <p>Retour à l'accueil</p>
+        </footer>
+    </body>
+</html>
