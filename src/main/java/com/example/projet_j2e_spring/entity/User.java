@@ -4,6 +4,7 @@ import com.example.projet_j2e_spring.entity.interfaceDAO.UserDAO;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table
