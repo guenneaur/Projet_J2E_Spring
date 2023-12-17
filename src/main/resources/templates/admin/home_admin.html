@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+
+    <body>
+        <header>
+            <th:block th:replace="/components/navbar"></th:block>
+        </header>
+        <p>Home Admin Page</p>
+
+        <div class="col-md-3">
+            <a href="/admin/orders">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4>Commandes</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/admin/products">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4>Tous les produits</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/admin/add_product">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4>Ajouter un produit</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/admin/users">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4>Utilisateurs</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+        <footer  class="footer-basic">
+            <p>Retour à l'accueil</p>
+        </footer>
+    </body>
+</html>

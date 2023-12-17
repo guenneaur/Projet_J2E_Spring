@@ -1,0 +1,63 @@
+<!--<%@ page import="com.DAO.ProductDAOimpl" %>-->
+<!--<%@ page import="com.DB.DBConnect" %>-->
+<!--<%@ page import="com.entity.Product" %><%&#45;&#45;-->
+<!--Created by IntelliJ IDEA.-->
+<!--User: CYTech Student-->
+<!--Date: 11/14/2023-->
+<!--Time: 1:20 PM-->
+<!--To change this template use File | Settings | File Templates.-->
+<!--&#45;&#45;%>-->
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <title>Admin - Ajouter produit</title>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+    <header>
+        <th:block th:replace="/components/navbar"></th:block>
+    </header>
+    <body>
+        <p th:if="${msg_success != null}" th:text="${msg_success}" class="text-center text-success"></p>
+
+        <p th:if="${msg_failed != null}" th:text="${msg_failed}" class="text-center text-danger"></p>
+
+
+        <form action="/admin/ajouter_produit" method="post">
+
+            <input type="text" name="pName" placeholder="Nom du produit" required>
+
+            <select id="inputState" name="pers" onchange="checkCat()">
+                <option value="New">Nouvelle Catégorie</option>
+                <option value="other">Autre</option>
+                <option selected>--Catégorie--</option>
+            </select>
+            <input type="text" id="entreePersonnalisee" name="cat" style="display: none;" placeholder="Entrez votre choix personnalisé">
+
+            <input type="number" step="any" min="0" name="price" placeholder="Prix" required>
+
+            <input type="number" min="1" name="quantity" placeholder="Quantité" required>
+
+            <input type="text" name="image" placeholder="image" required>
+
+            <button type="submit">Ajouter</button>
+        </form>
+        <script>
+            function checkCat() {
+                var inputState = document.getElementById("inputState");
+                var entreePersonnalisee = document.getElementById("entreePersonnalisee");
+
+                // Vérifier si l'option sélectionnée est "New"
+                if (inputState.value === "New") {
+                    // Afficher le champ d'entrée personnalisée
+                    entreePersonnalisee.style.display = "block";
+                } else {
+                    // Cacher le champ d'entrée personnalisée
+                    entreePersonnalisee.style.display = "none";
+                }
+            }
+        </script>
+
+    </body>
+</html>

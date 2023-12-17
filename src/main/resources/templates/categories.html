@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+    <title th:text="|Categorie - ${category}|"></title>
+    <th:block th:replace="/components/header"></th:block>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/asset/js/AddToCart.js"></script>
+</head>
+<header>
+    <th:block th:replace="/components/navbar">
+    </th:block>
+</header>
+<body>
+
+<div class="container mt-4">
+    <div class="row">
+        <div th:each="product : ${products}" class="col-md-3 mb-4">
+            <div th:classappend="${product.getQuantity() < 1} ? 'disabled-card'" class="card">
+                <div class="addToCartForm">
+                    <input type="hidden" name="productId" th:value="${product.getId()}"/>
+                    <input type="hidden" name="quantity" value="1"/>
+                    <a th:href="|/page_product/${product.getId()}|">
+                        <img th:src="${product.getImage()}" class="card-img-top product-image" th:alt="${product.getName()}">
+                    </a>
+                    <div class="card-body">
+                        <a th:href="|/page_product/${product.getId()}|">
+                            <h5 th:text="${product.getName()}" class="card-title"></h5>
+                        </a>
+                        <p class="card-text">Price: <span th:text="${product.getPrice()}"></span></p>
+
+                        <th:block th:if="${product.getQuantity()>0}">
+                            <button type="button" class="btn btn-primary addToCartBtn" th:onclick="|addToCart(${product.getId()})|">Ajouter au panier</button>
+                        </th:block>
+                        <th:block th:if="${product.getQuantity()<1}">
+                            <button class="btn btn-secondary" disabled>Ajouter au Panier</button>
+                        </th:block>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+  <html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="/components/header"></th:block>
+  </head>
+  <body>
+    <header>
+      <th:block th:replace="/components/navbar"></th:block>
+    </header>
+    <p th:if="${msg_success != null}" class="text-center text-success"><span th:text="${msg_success}"></span></p>
+
+    <p th:if="${msg_failed != null}" class="text-center text-danger"><span th:text="${msg_failed}"></span></p>
+
+    <table class="table table-striped">
+      <thead class="bg-primary text-white">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Image</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">User</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+        <th:block th:each="product : ${products}">
+          <tr>
+            <th scope="row" th:text="${product.getId()}"></th>
+            <th scope="row"><img style="width: 250px; height: 200px; object-fit: contain;" th:src="${product.getImage()}"></th>
+            <th scope="row" th:text="${product.getName()}"></th>
+            <th scope="row" th:text="${product.getCat()}"></th>
+            <th scope="row" th:text="${product.getPrice()}"></th>
+            <th scope="row" th:text="${product.getQuantity()}"></th>
+            <th scope="row" th:text="${product.getUser_id()}"></th>
+            <th><a th:href="|/admin/edit_products_admin/${product.getId()}|" class="btn btm-sm btn-primary">Modifier</a>
+              <form action="/admin/produits" method="post">
+                <input type="hidden" name="id" th:value="${product.getId()}">
+                <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+              </form>
+            </th>
+          </tr>
+        </th:block>
+      </tbody>
+    </table>
+  </body>
+</html>

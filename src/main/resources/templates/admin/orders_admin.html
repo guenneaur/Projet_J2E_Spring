@@ -1,0 +1,60 @@
+<!--<%&#45;&#45;-->
+<!--Created by IntelliJ IDEA.-->
+<!--User: CYTech Student-->
+<!--Date: 11/14/2023-->
+<!--Time: 1:18 PM-->
+<!--To change this template use File | Settings | File Templates.-->
+<!--&#45;&#45;%>-->
+<!--<%@ page import="com.entity.User" %>-->
+<!--<%@ page import="com.entity.Order" %>-->
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<!--<%-->
+<!--User LOGIN_USER = (User) session.getAttribute("LOGIN_USER");-->
+<!--List<Order> l_order = (List<Order>) session.getAttribute("l_order");-->
+<!--    %>-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <title>Admin - Commandes</title>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+    <header>
+        <th:block th:replace="/components/navbar"></th:block>
+    </header>
+    <body>
+        <div class="container mt-4">
+            <h2>Les commandes</h2>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date-commande</th>
+                    <th>Moyen de paiement</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                <% for (Order o : l_order) { %>-->
+                <tr th:each="order : ${orders}">
+                    <td>
+                        <p th:text="${order.getId()}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${#temporals.format(order.getOrderDate(), 'dd-MM-yyyy HH:mm')}"></p>
+                    </td>
+                    <td th:text="${order.getMethod_payment()}"></td>
+                    <td th:text="${order.getPrice()}"></td>
+                    <td><a th:href="|/utilisateur/commandes/${order.getId()}|">Voir détails</a></td>
+                </tr>
+<!--                <% } %>-->
+                </tbody>
+            </table>
+            <div>
+                <a href="/utilisateur">Retour</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+<!--<%@ page import="com.entity.User" %>-->
+<!--<%@ page import="java.util.List" %><%&#45;&#45;-->
+<!--Created by IntelliJ IDEA.-->
+<!--User: CYTech Student-->
+<!--Date: 11/21/2023-->
+<!--Time: 8:26 PM-->
+<!--To change this template use File | Settings | File Templates.-->
+<!--&#45;&#45;%>-->
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+
+<!--<%-->
+<!--List<User> list_user = (List<User>) request.getAttribute("list_user");-->
+<!--    %>-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <title>Admin - Users</title>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+    <header>
+        <th:block th:replace="/components/navbar">
+        </th:block>
+    </header>
+    <body>
+        <p th:if="${msg_sucess != null}" th:text="${msg_success}" class="text-center text-success"></p>
+        <p th:if="${msg_failed != null}" th:text="${msg_failed}" class="text-center text-danger"></p>
+        <table class="table table-striped">
+            <thead class="bg-primary text-white">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit Role</th>
+            </tr>
+            </thead>
+            <tbody>
+        <!--    <%-->
+        <!--    for(User user : list_user){-->
+        <!--    %>-->
+            <tr th:each="user : ${users}">
+                <th th:text="${user.getId()}" scope="row"></th>
+                <th th:text="${user.getName()}" scope="row"></th>
+                <th th:text="${user.getEmail()}" scope="row"></th>
+                <th th:text="${user.getRoles()}" scope="row"></th>
+                <th>
+                    <form action="/admin/utilisateurs" method="post">
+                        <input type="hidden" name="formName" value="form_del">
+                        <input type="hidden" name="id" th:value="${user.getId()}">
+                        <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                </th>
+                <th>
+                    <form action="/admin/utilisateurs" method="post">
+                        <input type="hidden" name="formName" value="form_role">
+                        <input type="hidden" name="id" th:value="${user.getId()}">
+                        <select id="inputState" name="role">
+                            <option selected th:value="${user.getRoles()}" th:text="${user.getRoles()}"></option>
+                            <option value="admin">Administrateur</option>
+                            <option value="modo">Modérateur</option>
+                            <option value="random">Random</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-danger">Valider</button>
+                    </form>
+                </th>
+
+            </tr>
+        <!--    <%-->
+
+        <!--    }-->
+        <!--    %>-->
+
+            </tbody>
+        </table>
+    </body>
+</html>

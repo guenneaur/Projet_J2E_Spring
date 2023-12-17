@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+
+    <body>
+    <header>
+        <th:block th:replace="/components/navbar"></th:block>
+    </header>
+
+    <p th:if="${msg_success != null}" th:text="${msg_success}" class="text-center text-success"></p>
+
+    <p th:if="${msg_failed != null}" th:text="${msg_failed}" class="text-center text-danger"></p>
+
+
+    <form th:action="|/admin/modifier_produit/${product.getId()}|" method="post">
+        <input type="text" name="id" th:value="${product.getId()}">
+        <input type="text" name="pName" th:value="${product.getName()}" placeholder="Nom du produit" required>
+
+        <select id="inputState" name="pers" onchange="checkCat()">
+            <option selected th:value="${product.getCat()}" th:text="${product.getCat()}"></option>
+            <option value="New">Nouvelle Catégorie</option>
+            <option value="other">Autre</option>
+            <option>--Catégorie--</option>
+        </select>
+        <input type="text" id="entreePersonnalisee" name="cat" style="display: none;" placeholder="Entrez votre choix personnalisé">
+
+        <input type="number" th:value="${product.getPrice()}" step="any" min="0" name="price" placeholder="Prix" required>
+
+        <input type="number" th:value="${product.getQuantity()}" min="1" name="quantity" placeholder="Quantité" required>
+
+        <input type="text" th:value="${product.getImage()}"  name="image" placeholder="image" required>
+
+        <button type="submit">Modifier</button>
+    </form>
+    <script>
+        function checkCat() {
+            var inputState = document.getElementById("inputState");
+            var entreePersonnalisee = document.getElementById("entreePersonnalisee");
+
+            // Vérifier si l'option sélectionnée est "New"
+            if (inputState.value === "New") {
+                // Afficher le champ d'entrée personnalisée
+                entreePersonnalisee.style.display = "block";
+            } else {
+                // Cacher le champ d'entrée personnalisée
+                entreePersonnalisee.style.display = "none";
+            }
+        }
+    </script>
+    </body>
+</html>

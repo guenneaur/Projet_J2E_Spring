@@ -1,0 +1,28 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <title>Inscription</title>
+        <th:block th:replace="/components/header"></th:block>
+    </head>
+    <body>
+        <header>
+            <th:block th:replace="/components/navbar"></th:block>
+        </header>
+        <div class="registration-container">
+            <h2>Inscription</h2>
+            <p th:if="${msg_success != null}" class="text-center text-success">${msg_success}</p>
+
+            <p th:if="${msg_failed != null}" class="text-center text-danger">${msg_failed}</p>
+
+            <form action="/register" method="POST">
+                <input type="text" name="name" placeholder="Nom" required>
+                <input type="email" name="email" placeholder="Adresse Email" required>
+                <input type="password" name="password" placeholder="Mot de Passe" required>
+                <button type="submit">Valider votre inscription</button>
+            </form>
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,15 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/components/header"></th:block>
+    <title>Profil - User</title>
+</head>
+<header>
+    <th:block th:replace="/components/navbar"></th:block>
+</header>
+    <body>
+        <h2>Bienvenue <span th:text="${LOGIN_USER.getName()}"></span> !</h2>
+        <button><a style="color: white" href="/utilisateur/infos">Infos persos</a></button>
+        <button><a style="color: white" href="/utilisateur/commandes">Mes commandes</a></button>
+        <button><a style="color: white" href="/panier">Mon panier</a></button>
+    </body>
+</html>

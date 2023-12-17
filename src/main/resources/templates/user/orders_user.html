@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="en" xmlns:th="https://www.thymeleaf.org">
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+            <title>Commandes - User</title>
+            <th:block th:replace="/components/header"></th:block>
+        </head>
+        <body>
+        <header>
+            <th:block th:replace="/components/navbar"></th:block>
+        </header>
+        <div class="container mt-4">
+            <h2>Commandes</h2>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date-commande</th>
+                    <th>Moyen de paiement</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="order : ${orders}">
+                        <tr>
+                            <td>
+                                <p th:text="${order.getId()}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${#temporals.format(order.getOrderDate(), 'dd-MM-yyyy HH:mm')}"></p>
+                            </td>
+                            <td>
+                                <span th:text="${order.getMethod_payment()}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${order.getPrice()}"></span>
+                            </td>
+                            <td><a th:href="|/utilisateur/commandes/${order.getId}|">Voir détails</a></td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+            <div>
+                <a href="/utilisateur">Retour</a>
+            </div>
+        </div>
+        </body>
+    </html>

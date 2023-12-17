@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <th:block th:replace="/components/header"></th:block>
+        <title>Produit</title>
+    </head>
+    <body>
+        <header>
+            <th:block th:replace="/components/navbar"></th:block>
+        </header>
+
+        <div class="product-container">
+            <div class="product-image">
+                <img th:src="${product.getImage()}" alt="CHOKBAR">
+            </div>
+            <div class="product-details">
+                <h2 th:text="${product.getName()}"></h2>
+                <p th:text="'Catégorie : ' + ${product.getCat()}"></p>
+                <p th:text="'Prix : ' + ${product.getPrice()}"></p>
+                <p th:text="'Quantité : ' + ${product.getQuantity()}"></p>
+                <form method="post" th:action="|/order/add/${product.getId()}|">
+                    <th:block th:if="${product.getQuantity()>0}">
+                        <button type="submit" >Ajouter au Panier</button>
+                    </th:block>
+                    <th:block th:if="${product.getQuantity()<1}">
+                        <button class="btn btn-secondary" disabled>Ajouter au Panier</button>
+                    </th:block>
+                </form>
+
+            </div>
+        </div>
+
+    </body>
+</html>

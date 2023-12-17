@@ -1,0 +1,53 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <th:block th:replace="/components/header"></th:block>
+        <title>Infos - User</title>
+    </head>
+    <header>
+        <th:block th:replace="/components/navbar"></th:block>
+    </header>
+        <body>
+        <div class="container mt-4">
+            <h2>Profil de <span th:text="${LOGIN_USER.getName()}"></span></h2>
+
+            <p th:if="${msg_success != null}" th:text="${msg_success}" class="text-center text-success"></p>
+            <p th:if="${msg_failed != null}" th:text="${msg_failed}" class="text-center text-danger"></p>
+
+            <form action="/utilisateur/infos" method="post">
+                <input type="hidden" name="formName" value="form_infos">
+                <input type="hidden" name="id" th:value="${LOGIN_USER.getId()}">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" th:value="${LOGIN_USER.getName()}">
+
+                <label for="adresse">Adresse :</label>
+                <input type="text" id="adresse" name="adresse" th:value="${LOGIN_USER.getAdress()}">
+
+                <label for="ville">Ville :</label>
+                <input type="text" id="ville" name="ville" th:value="${LOGIN_USER.getCity()}">
+
+                <label for="codePostal">Code Postal :</label>
+                <input type="text" id="codePostal" name="codePostal" th:value="${LOGIN_USER.getPostal()}">
+
+                <input type="hidden" name="formName" value="form_mail">
+                <input type="hidden" name="id" th:value="${LOGIN_USER.getId()}">
+
+                <label for="codePostal">Mail :</label>
+                <input type="text" id="mail" name="mail" th:value="${LOGIN_USER.getEmail()}">
+
+                <input type="hidden" name="formName" value="form_pwd">
+                <input type="hidden" name="id" th:value="${LOGIN_USER.getId()}">
+
+                <label>Mot de passe :</label>
+                <input type="password" id="pwd" name="pwd">
+                <label>Confirmation du mot de passe :</label>
+                <input type="password" id="pwd_verif" name="pwd_verif">
+
+                <button type="submit" class="btn btn-sm btn-danger">Modifier</button>
+            </form>
+
+
+        </div>
+        </body>
+</html>

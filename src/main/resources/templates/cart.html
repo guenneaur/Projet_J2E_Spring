@@ -1,0 +1,73 @@
+<!--<%@ page import="java.util.List" %>-->
+<!--<%@ page import="com.entity.Cart" %>-->
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<!--<%@ page import="com.entity.Cart" %>-->
+<!--<%@ page import="com.entity.Product" %>-->
+<!--<%@ page import="java.util.List" %>-->
+
+<!--<%-->
+<!--ProductDAOimpl dao = new ProductDAOimpl(DBConnect.getConn());-->
+<!--%>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+        <link rel="stylesheet" type="text/css" href="/asset/style/cart.css">
+        <title>Mon Panier</title>
+        <th:block th:replace="/components/header"></th:block>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="/asset/js/AddToCart.js"></script>
+    </head>
+    <header>
+        <th:block th:replace="/components/navbar"></th:block>
+    </header>
+    <body>
+    <div class="container mt-4">
+        <h2>Mon Panier</h2>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cartItem : ${cartItems}">
+                <td>
+                    <img style="width: 250px; height: 200px; object-fit: contain;" th:src="${cartItem.getImage()}" th:alt="${cartItem.getProduct().getId()}">
+                </td>
+                <td>
+                    <div class="input-group">
+                        <select
+                                class="form-select select-quantity"
+                                th:id="'quantity' + ${cartItem.getId()}"
+                                th:onchange="|updateCart(${cartItem.getId()}, this.value)|"
+
+                        >
+                            <option
+                                    th:each="i : ${#numbers.sequence(1, cartItem.getProduct().getQuantity())}"
+                                    th:value="${i}" th:selected="${i == cartItem.getQuantity()}" th:text="${i}">
+                            </option>
+                        </select>
+
+                        <button type="button" th:onclick="|decrementCart(${cartItem.getId()})|">-</button>
+                        <button type="button" th:onclick="|incrementCart(${cartItem.getId()})|">+</button>
+                        <button type="button" th:onclick="|addToCart('delete', ${cartItem.getId()})|" class="btn btn-danger">Delete</button>
+                    </div>
+                </td>
+                <td th:text="${cartItem.getPrice()}"></td>
+                <td th:text="${cartItem.getQuantity() * cartItem.getPrice()}"></td>
+            </tr>
+        </tbody>
+        </table>
+        <div>
+            <a href="/panier/validation">Valider panier</a>
+        </div>
+    </div>
+    </body>
+</html>
+

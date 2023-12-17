@@ -1,0 +1,79 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/components/header"></th:block>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/asset/style/style.css">
+    <title>Paiement</title>
+
+    <style>
+        .payment-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-container h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <th:block th:replace="/components/navbar"></th:block>
+</header>
+
+
+<div class="payment-container">
+    <p th:if="${msg_success != null}" th:text="${msg_success}" class="text-center text-success"></p>
+    <p th:if="${msg_failed != null}" th:text="${msg_failed}" class="text-center text-danger"></p>
+
+    <h2>Informations de Paiement</h2>
+    <form action="/panier/validation" method="post">
+        <input type="text" name="nom" placeholder="Nom sur la Carte" required>
+        <input type="text" name="numerocarte" placeholder="Numéro de Carte" required>
+        <input type="text" name="dateexpiration" placeholder="Date d'Expiration (MM/AA)" required>
+        <input type="text" name="codecvv" placeholder="Code CVV" required>
+
+        <!-- Champs bloqués avec les informations de l'utilisateur connecté -->
+        <input type="text" name="nom_utilisateur" placeholder="Nom" th:value="${LOGIN_USER.getName() != null} ? ${LOGIN_USER.getName()}">
+        <input type="text" name="adresse_utilisateur" placeholder="Adresse" th:value="${LOGIN_USER.getAdress() != null} ? ${LOGIN_USER.getAdress()}">
+        <input type="text" name="ville_utilisateur" placeholder="Ville" th:value="${LOGIN_USER.getCity() != null} ? ${LOGIN_USER.getCity()}">
+        <input type="text" name="email_utilisateur" placeholder="Email" th:value="${LOGIN_USER.getEmail() != null} ? ${LOGIN_USER.getEmail()}">
+        <input type="text" name="codepostal_utilisateur" placeholder="Code Postal" th:value="${LOGIN_USER.getPostal() != 0} ? ${LOGIN_USER.getPostal()}">
+
+        <button type="submit">Valider le Paiement</button>
+    </form>
+</div>
+
+</body>
+</html>
